@@ -70,3 +70,22 @@ form button:hover {
     border-radius: 4px;
     font-size: 1em;
 }
+
+.task-name {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.task-name.done {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.task-actions button, .task-actions select {
+    margin-left: 5px;
+    padding: 4px 8px;
+    font-size: 0.95em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
