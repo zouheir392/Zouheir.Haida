@@ -98,5 +98,29 @@ function renderTasks() {
 }
 
 
+taskForm.onsubmit = e => {
+    e.preventDefault();
+    const name = taskInput.value.trim();
+    if (name) {
+        tasks.push({ name, status: 'todo', editing: false });
+        taskInput.value = '';
+        renderTasks();
+    }
+};
+
+statusFilter.onchange = () => {
+    filterStatus = statusFilter.value;
+    renderTasks();
+};
+
+searchInput.oninput = () => {
+    searchQuery = searchInput.value;
+    renderTasks();
+};
+
+// Prima visualizzazione
+renderTasks();
+
+
 
 
