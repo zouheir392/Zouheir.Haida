@@ -9,6 +9,8 @@ const stopButton = document.getElementById('stop');
 const resetButton = document.getElementById('reset');
 const lapButton = document.getElementById('lap');
 const lapsList = document.getElementById('laps');
+// Funzione per formattare il tempo in mm:ss:cc
+// il task viene aggiornato e la lista dei task viene renderizzata di nuovo.
 
 function formatTime(ms) {
     const minutes = Math.floor(ms / 60000);
@@ -20,17 +22,18 @@ function formatTime(ms) {
         String(centiseconds).padStart(2, '0')
     );
 }
-
+// Funzione per aggiornare il display del timer e la lista dei giri
 function updateDisplay() {
     display.textContent = formatTime(milliseconds);
 }
+// Funzione per aggiornare la lista dei giri
 
 function updateLaps() {
     lapsList.innerHTML = '';
     laps.forEach((lapTime, idx) => {
         const li = document.createElement('li');
         li.textContent = `Giro ${idx + 1}: ${formatTime(lapTime)}`;
-
+        // Crea un pulsante per cancellare il giro
         const delBtn = document.createElement('button');
         delBtn.textContent = 'Cancella';
         delBtn.className = 'delete-lap';
@@ -43,7 +46,7 @@ function updateLaps() {
         lapsList.appendChild(li);
     });
 }
-
+    // Aggiungi un messaggio se non ci sono giri
 function runTimer() {
     if (isRunning) {
         timer = setTimeout(() => {
@@ -53,19 +56,19 @@ function runTimer() {
         }, 10);
     }
 }
-
+// Se non ci sono giri, mostra un messaggio
 function startTimer() {
     if (!isRunning) {
         isRunning = true;
         runTimer();
     }
 }
-
+// Se ci sono giri, mostra il numero di giri
 function stopTimer() {
     isRunning = false;
     clearTimeout(timer);
 }
-
+// Se non ci sono giri, mostra un messaggio
 function resetTimer() {
     stopTimer();
     milliseconds = 0;
@@ -73,14 +76,14 @@ function resetTimer() {
     updateDisplay();
     updateLaps();
 }
-
+// Se non ci sono giri, mostra un messaggio
 function lapTimer() {
     if (isRunning) {
         laps.push(milliseconds);
         updateLaps();
     }
 }
-
+// Aggiungi gli event listener ai pulsanti
 startButton.addEventListener('click', startTimer);
 stopButton.addEventListener('click', stopTimer);
 resetButton.addEventListener('click', resetTimer);
