@@ -14,3 +14,24 @@
             <button type="submit">Cerca Meteo</button>
             <button type="button" id="geo-btn">Usa la mia posizione</button>
         </form>
+        <div id="weather-result"></div>
+        <div id="weather-legend">
+            <h3>Legenda Weather Code</h3>
+            <ul>
+                <li>0: Soleggiato ☀️</li>
+                <li>1, 2: Prevalentemente sereno 🌤️</li>
+                <li>3: Nuvoloso ☁️</li>
+                <li>45, 48: Nebbia 🌫️</li>
+                <li>51, 53, 55: Pioviggine 🌦️</li>
+                <li>61, 63, 65: Pioggia 🌧️</li>
+                <li>71, 73, 75: Neve 🌨️</li>
+                <li>80, 81, 82: Rovesci ⛈️</li>
+                <li>95: Temporale ⛈️</li>
+                <li>99: Temporale forte ⛈️</li>
+            </ul>
+            <small>Fonte: <a href="https://open-meteo.com/en/docs#api_form" target="_blank">Open-Meteo Docs</a></small>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
