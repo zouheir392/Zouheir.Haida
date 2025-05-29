@@ -43,3 +43,20 @@ function updateLaps() {
         lapsList.appendChild(li);
     });
 }
+
+function runTimer() {
+    if (isRunning) {
+        timer = setTimeout(() => {
+            milliseconds += 10;
+            updateDisplay();
+            runTimer();
+        }, 10);
+    }
+}
+
+function startTimer() {
+    if (!isRunning) {
+        isRunning = true;
+        runTimer();
+    }
+}
