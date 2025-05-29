@@ -7,8 +7,10 @@
 </head>
 <body>
     <div class="container">
+        
         <h1>Meteo App</h1>
         <form id="location-form">
+            // Inserisci le coordinate geografiche per ottenere le previsioni meteo
             <input type="number" step="any" id="latitude" placeholder="Latitudine" required>
             <input type="number" step="any" id="longitude" placeholder="Longitudine" required>
             <button type="submit">Cerca Meteo</button>
@@ -16,6 +18,7 @@
         </form>
         <div id="weather-result"></div>
         <div id="weather-legend">
+            // Mostra la legenda dei codici meteo
             <h3>Legenda Weather Code</h3>
             <ul>
                 <li>0: Soleggiato ☀️</li>
@@ -29,6 +32,7 @@
                 <li>95: Temporale ⛈️</li>
                 <li>99: Temporale forte ⛈️</li>
             </ul>
+            // Mostra le informazioni sull'API Open-Meteo
             <small>Fonte: <a href="https://open-meteo.com/en/docs#api_form" target="_blank">Open-Meteo Docs</a></small>
         </div>
     </div>

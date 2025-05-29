@@ -1,3 +1,4 @@
+// MeteoApp - Script JavaScript per la visualizzazione delle condizioni meteo
 const form = document.getElementById('location-form');
 const weatherDiv = document.getElementById('weather-result');
 const geoBtn = document.getElementById('geo-btn');
@@ -6,6 +7,7 @@ const lonInput = document.getElementById('longitude');
 
 // Mappa weather_code -> icona e descrizione
 const weatherIcons = {
+    // Mappa dei codici meteo a icone e descrizioni
     0:  { icon: "☀️", desc: "Soleggiato" },
     1:  { icon: "🌤️", desc: "Prevalentemente sereno" },
     2:  { icon: "🌤️", desc: "Parzialmente nuvoloso" },
@@ -27,20 +29,20 @@ const weatherIcons = {
     95: { icon: "⛈️", desc: "Temporale" },
     99: { icon: "⛈️", desc: "Temporale forte" }
 };
-
+// Funzione per ottenere le condizioni meteo
 function getWeatherIcon(code) {
     return weatherIcons[code] || { icon: "❓", desc: "Sconosciuto" };
 }
-
+// Inizializza i campi di input con valori predefiniti
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const lat = latInput.value;
     const lon = lonInput.value;
 
     weatherDiv.textContent = "Caricamento...";
-
+// Controlla se i campi di latitudine e longitudine sono vuoti
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,rain,cloud_cover,wind_speed_10m,weather_code`;
-
+// Controlla se i campi di latitudine e longitudine sono validi
     try {
         const res = await fetch(url);
         if (!res.ok) throw new Error("Errore nella richiesta API");
@@ -55,9 +57,11 @@ form.addEventListener('submit', async function(e) {
 
         const c = data.current;
         const weather = getWeatherIcon(c.weather_code);
-
+// Controlla se i dati meteo sono disponibili
+// Controlla se i dati meteo sono validi
+        weatherDiv.innerHTML = ""; // Pulisce il contenuto precedente
         weatherDiv.innerHTML = `
-            <div style="font-size:2.5em">${weather.icon}</div>
+            <div style="font-size:2.5em">${weather.icon}</div> 
             <b>${weather.desc}</b><br>
             <b>Latitudine:</b> ${data.latitude}<br>
             <b>Longitudine:</b> ${data.longitude}<br>
@@ -69,17 +73,19 @@ form.addEventListener('submit', async function(e) {
             <b>Vento:</b> ${c.wind_speed_10m} km/h<br>
             <b>Weather code:</b> ${c.weather_code}
         `;
-    } catch (err) {
+    } catch (err) {// Gestione degli errori
         weatherDiv.textContent = "Errore: " + err.message;
     }
 });
 
 // Geolocalizzazione
+// Controlla se il browser supporta la geolocalizzazione
 geoBtn.addEventListener('click', function() {
     if (!navigator.geolocation) {
         alert("Geolocalizzazione non supportata dal browser.");
         return;
     }
+    // Controlla se i campi di latitudine e longitudine sono vuoti
     geoBtn.disabled = true;
     geoBtn.textContent = "Ricerca posizione...";
     navigator.geolocation.getCurrentPosition(
