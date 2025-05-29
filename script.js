@@ -20,3 +20,26 @@ function formatTime(ms) {
         String(centiseconds).padStart(2, '0')
     );
 }
+
+function updateDisplay() {
+    display.textContent = formatTime(milliseconds);
+}
+
+function updateLaps() {
+    lapsList.innerHTML = '';
+    laps.forEach((lapTime, idx) => {
+        const li = document.createElement('li');
+        li.textContent = `Giro ${idx + 1}: ${formatTime(lapTime)}`;
+
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'Cancella';
+        delBtn.className = 'delete-lap';
+        delBtn.onclick = function() {
+            laps.splice(idx, 1);
+            updateLaps();
+        };
+
+        li.appendChild(delBtn);
+        lapsList.appendChild(li);
+    });
+}
