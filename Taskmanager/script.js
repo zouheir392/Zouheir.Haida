@@ -8,8 +8,12 @@ const taskList = document.getElementById('task-list');
 const statusFilter = document.getElementById('status-filter');
 const searchInput = document.getElementById('search-input');
 
+
 function renderTasks() {
     taskList.innerHTML = '';
+    /**
+     * Filtra l'array di task in base allo stato selezionato e alla query di ricerca.
+     */
     let filteredTasks = tasks
         .filter(task => 
             (filterStatus === 'all' || task.status === filterStatus) &&
@@ -19,7 +23,9 @@ function renderTasks() {
     filteredTasks.forEach((task, idx) => {
         const li = document.createElement('li');
         li.className = 'task-item';
-        
+ /**
+ * Renderizza la lista dei task filtrati e aggiorna il DOM con le relative azioni di modifica, eliminazione e cambio stato.
+ */
         if (task.editing) {
             const input = document.createElement('input');
             input.type = 'text';
@@ -53,6 +59,10 @@ function renderTasks() {
 
             
             // Stato
+            // codice crea un menu a tendina (select) per ogni task che permette di cambiare 
+            // il suo stato (Da fare, In corso, Completata). Quando l’utente seleziona uno stato diverso,
+            //  aggiorna il task e ricarica la lista.
+
             const statusSelect = document.createElement('select');
             ['todo', 'doing', 'done'].forEach(st => {
                 const opt = document.createElement('option');
@@ -71,7 +81,8 @@ function renderTasks() {
             // Azioni
             const actions = document.createElement('span');
             actions.className = 'task-actions';
-
+            // codice crea i pulsanti "Modifica" ed "Elimina" per ogni task nella lista, 
+            // assegnando loro le funzioni per modificare o eliminare il task quando vengono cliccati.
             const editBtn = document.createElement('button');
             editBtn.textContent = 'Modifica';
             editBtn.className = 'edit-btn';
