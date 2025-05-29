@@ -27,3 +27,51 @@ const weatherIcons = {
     95: { icon: "⛈️", desc: "Temporale" },
     99: { icon: "⛈️", desc: "Temporale forte" }
 };
+
+function getWeatherIcon(code) {
+    return weatherIcons[code] || { icon: "❓", desc: "Sconosciuto" };
+}
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const lat = latInput.value;
+    const lon = lonInput.value;
+
+    weatherDiv.textContent = "Caricamento...";
+
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,rain,cloud_cover,wind_speed_10m,weather_code`;
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Errore nella richiesta API");
+        const data = await res.json();
+
+        if (!data.current) {
+            weatherDiv.textContent = "Dati meteo non disponibili per queste coordinate.";
+            return;
+        }
+
+         window.lastWeather = data;
+
+        const c = data.current;
+        const weather = getWeatherIcon(c.weather_code);
+
+        weatherDiv.innerHTML = `
+            <div style="font-size:2.5em">${weather.icon}</div>
+            <b>${weather.desc}</b><br>
+            <b>Latitudine:</b> ${data.latitude}<br>
+            <b>Longitudine:</b> ${data.longitude}<br>
+            <b>Temperatura:</b> ${c.temperature_2m} °C<br>
+            <b>Umidità:</b> ${c.relative_humidity_2m} %<br>
+            <b>Precipitazioni:</b> ${c.precipitation} mm<br>
+            <b>Pioggia:</b> ${c.rain} mm<br>
+            <b>Copertura nuvolosa:</b> ${c.cloud_cover} %<br>
+            <b>Vento:</b> ${c.wind_speed_10m} km/h<br>
+            <b>Weather code:</b> ${c.weather_code}
+        `;
+    } catch (err) {
+        weatherDiv.textContent = "Errore: " + err.message;
+    }
+});
+
+
