@@ -80,3 +80,12 @@ function lapTimer() {
         updateLaps();
     }
 }
+
+startButton.addEventListener('click', startTimer);
+stopButton.addEventListener('click', stopTimer);
+resetButton.addEventListener('click', resetTimer);
+lapButton.addEventListener('click', lapTimer);
+
+// Inizializza display e lista giri all'avvio
+updateDisplay();
+updateLaps();
