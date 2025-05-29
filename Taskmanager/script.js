@@ -51,3 +51,20 @@ function renderTasks() {
             span.className = 'task-name' + (task.status === 'done' ? ' done' : '');
             li.appendChild(span);
 
+            
+            // Stato
+            const statusSelect = document.createElement('select');
+            ['todo', 'doing', 'done'].forEach(st => {
+                const opt = document.createElement('option');
+                opt.value = st;
+                opt.textContent = st === 'todo' ? 'Da fare' : st === 'doing' ? 'In corso' : 'Completata';
+                if (task.status === st) opt.selected = true;
+                statusSelect.appendChild(opt);
+            });
+            statusSelect.onchange = () => {
+                task.status = statusSelect.value;
+                renderTasks();
+            };
+            li.appendChild(statusSelect);
+
+
