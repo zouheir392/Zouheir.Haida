@@ -67,4 +67,36 @@ function renderTasks() {
             };
             li.appendChild(statusSelect);
 
+            
+            // Azioni
+            const actions = document.createElement('span');
+            actions.className = 'task-actions';
+
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'Modifica';
+            editBtn.className = 'edit-btn';
+            editBtn.onclick = () => {
+                task.editing = true;
+                renderTasks();
+            };
+            actions.appendChild(editBtn);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Elimina';
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.onclick = () => {
+                tasks.splice(tasks.indexOf(task), 1);
+                renderTasks();
+            };
+            actions.appendChild(deleteBtn);
+
+            li.appendChild(actions);
+        }
+
+        taskList.appendChild(li);
+    });
+}
+
+
+
 
