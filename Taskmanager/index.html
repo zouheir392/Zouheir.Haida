@@ -9,16 +9,11 @@
     <div class="container">
         <h1>Lista Attività</h1>
         <form id="task-form">
+            // Aggiungi un campo di input per inserire nuove attività
             <input type="text" id="task-input" placeholder="Nuova attività..." required>
             <button type="submit">Aggiungi</button>
         </form>
-        <!--
-            Questo codice HTML implementa un menu a tendina (elemento <select>) associato a ciascun task nella lista delle attività.
-            L'utente può selezionare uno stato tra "Da fare", "In corso" e "Completata" per ogni task.
-            Al cambiamento dello stato tramite il menu a tendina, il codice aggiorna lo stato del task corrispondente e ricarica la lista delle attività per riflettere la modifica.
-        -->
-
-
+     // Aggiungi un filtro per lo stato delle attività e un campo di ricerca
          <div class="controls">
             <select id="status-filter">
                 <option value="all">Tutte</option>
@@ -26,6 +21,7 @@
                 <option value="doing">In corso</option>
                 <option value="done">Completata</option>
             </select>
+            // Aggiungi un campo di ricerca per filtrare le attività
             <input type="text" id="search-input" placeholder="Cerca attività...">
         </div>
         <ul id="task-list"></ul>

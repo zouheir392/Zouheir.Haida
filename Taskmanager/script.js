@@ -24,14 +24,14 @@ function renderTasks() {
     filteredTasks.forEach((task, idx) => {
         const li = document.createElement('li');
         li.className = 'task-item';
-
+        // codice aggiunge un numero progressivo a ogni task, che viene mostrato all'inizio della riga.
         if (task.editing) {
             const input = document.createElement('input');
             input.type = 'text';
             input.value = task.name;
             input.className = 'task-name';
             li.appendChild(input);
-
+            // codice crea i pulsanti "Salva" e "Annulla" per ogni task in modalità modifica.
             const saveBtn = document.createElement('button');
             saveBtn.textContent = 'Salva';
             saveBtn.className = 'save-btn';
