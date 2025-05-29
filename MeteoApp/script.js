@@ -74,4 +74,26 @@ form.addEventListener('submit', async function(e) {
     }
 });
 
+// Geolocalizzazione
+geoBtn.addEventListener('click', function() {
+    if (!navigator.geolocation) {
+        alert("Geolocalizzazione non supportata dal browser.");
+        return;
+    }
+    geoBtn.disabled = true;
+    geoBtn.textContent = "Ricerca posizione...";
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            latInput.value = pos.coords.latitude.toFixed(4);
+            lonInput.value = pos.coords.longitude.toFixed(4);
+            geoBtn.disabled = false;
+            geoBtn.textContent = "Usa la mia posizione";
+        },
+        err => {
+            alert("Impossibile ottenere la posizione.");
+            geoBtn.disabled = false;
+            geoBtn.textContent = "Usa la mia posizione";
+        }
+    );
+});
 
