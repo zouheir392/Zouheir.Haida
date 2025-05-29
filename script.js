@@ -60,3 +60,23 @@ function startTimer() {
         runTimer();
     }
 }
+
+function stopTimer() {
+    isRunning = false;
+    clearTimeout(timer);
+}
+
+function resetTimer() {
+    stopTimer();
+    milliseconds = 0;
+    laps = [];
+    updateDisplay();
+    updateLaps();
+}
+
+function lapTimer() {
+    if (isRunning) {
+        laps.push(milliseconds);
+        updateLaps();
+    }
+}
