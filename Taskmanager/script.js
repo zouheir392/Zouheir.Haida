@@ -11,21 +11,20 @@ const searchInput = document.getElementById('search-input');
 
 function renderTasks() {
     taskList.innerHTML = '';
-    /**
-     * Filtra l'array di task in base allo stato selezionato e alla query di ricerca.
-     */
+    // codice filtra i task in base allo stato selezionato e alla query di ricerca.
+    // Se lo stato è "all", mostra tutti i task, altrimenti mostra solo quelli con lo stato corrispondente.
     let filteredTasks = tasks
         .filter(task => 
             (filterStatus === 'all' || task.status === filterStatus) &&
             task.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
+    // codice ordina i task in base allo stato (Da fare, In corso, Completata) e poi per nome.
+
 
     filteredTasks.forEach((task, idx) => {
         const li = document.createElement('li');
         li.className = 'task-item';
- /**
- * Renderizza la lista dei task filtrati e aggiorna il DOM con le relative azioni di modifica, eliminazione e cambio stato.
- */
+
         if (task.editing) {
             const input = document.createElement('input');
             input.type = 'text';
@@ -71,6 +70,7 @@ function renderTasks() {
                 if (task.status === st) opt.selected = true;
                 statusSelect.appendChild(opt);
             });
+            
             statusSelect.onchange = () => {
                 task.status = statusSelect.value;
                 renderTasks();
